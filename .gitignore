@@ -1,0 +1,41 @@
+# Maven
+target/
+.idea/
+*.iml
+*.ipr
+*.iws
+/.mvn/
+.mvn/wrapper/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# IntelliJ
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE
+*.swp
+*~.nib
+
+# Maven Wrapper JAR files
+mvnw
+mvnw.cmd
+
+# Custom files
+*.bak
+*.tmp
