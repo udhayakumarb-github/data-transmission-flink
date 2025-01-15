@@ -3,6 +3,10 @@ package com.elan.example.job;
 import com.elan.example.config.KafkaConfig;
 import com.elan.example.model.KafkaConsumerRecord;
 import com.elan.example.model.KafkaConsumerRecordDeserializer;
+import com.elan.example.service.PCFSettingInstantiationService;
+import com.elan.example.service.impl.PCFSettingInstantiationServiceImpl;
+import com.elan.example.service.model.PCFSetting;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.connector.kafka.source.KafkaSource;
@@ -56,13 +60,6 @@ public class ServiceDomainDataConsumerJob {
 
             }).setParallelism(1);
 
-
-
-//            env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source").map(record -> {
-//                log.info("Topic: {} - Message: {}", record.getTopic(), record.getMessage());
-//                return record;
-//            }).setParallelism(1);
-
             // Execute Flink job
             env.execute("MongoDB to Kafka Data Pipeline");
         } catch (Exception e) {
@@ -73,6 +70,14 @@ public class ServiceDomainDataConsumerJob {
 
     private static void processPCFData(String message) {
         log.info("PCF data - {}", message);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            PCFSetting pcfSetting = objectMapper.readValue(message, PCFSetting.class);
+            PCFSettingInstantiationService pcfSettingInstantiationService = new PCFSettingInstantiationServiceImpl();
+            pcfSettingInstantiationService.initiatePCFSetting(pcfSetting);
+        } catch (Exception e) {
+            log.error("Failed to store message for Catalog PCF Setting");
+        }
     }
 
     private static void processDMMData(String message) {

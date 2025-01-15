@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <!-- catalog pcf sd dependency -->
+        <dependency>
+            <groupId>com.elan.example</groupId>
+            <artifactId>otp-catalog-pcf-sd</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- Lombok dependency -->
         <dependency>
