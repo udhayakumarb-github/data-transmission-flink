@@ -35,4 +35,8 @@ public class ServiceConfig implements Serializable {
         // If the domain is not configured, throw an exception
         throw new RuntimeException("Domain Configuration Not Found for domain: " + serviceDomain);
     }
+
+    public MongoConfig getMetadataMongoConfig(String serviceDomain) {
+        return null;
+    }
 }

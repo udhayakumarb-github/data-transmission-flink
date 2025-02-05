@@ -4,14 +4,13 @@ import com.elan.example.config.ServiceConfig;
 import com.elan.example.loader.ServiceConfigLoader;
 import com.elan.example.processor.ServiceDomainProcessor;
 import com.elan.example.util.ConfigValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-public class ServiceDomainDataTransmissionJob {
-
-    private static final Logger log = LoggerFactory.getLogger(ServiceDomainDataTransmissionJob.class);
+@Slf4j
+public class DataTransmissionJob {
 
     public static void main(String[] args) throws Exception {
         log.info("Starting Flink application to process MongoDB and publish to Kafka");
